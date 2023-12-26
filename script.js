@@ -42,7 +42,7 @@ btnScrollTo.addEventListener("click", function (e) {
 // Page navigation
 
 // Add event listener to common parent element
-//Determine what element originated the event
+// Determine what element originated the event
 document.querySelector(".nav__links").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -54,6 +54,32 @@ document.querySelector(".nav__links").addEventListener("click", function (e) {
   }
 });
 
-/////////////////////////////////////////
-/////////////////////////////////////////
-/////////////////////////////////////////
+// Tabbed component
+const tabs = document.querySelectorAll(".operations__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabsContentArea = document.querySelectorAll(".operations__content");
+
+tabsContainer.addEventListener("click", function (e) {
+  const clicked = e.target.closest(".operations__tab");
+
+  // Guard clause
+  if (!clicked) return;
+
+  // Remove active classes and hide their elements
+  tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+  tabsContentArea.forEach((c) =>
+    c.classList.remove("operations__content--active")
+  );
+
+  // Active tab
+  clicked.classList.add("operations__tab--active");
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add(`operations__content--active`);
+});
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
