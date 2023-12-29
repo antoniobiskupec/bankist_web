@@ -89,17 +89,24 @@ const handleHover = function (e, opacity) {
     const logo = link.closest(".nav").querySelector("img");
 
     siblings.forEach((el) => {
+      // i can replace =opacity with =this
       if (el !== link) el.style.opacity = opacity;
     });
   }
 };
 
+// need to update this section with handleHover.bind and i need to add this siblings foreach part
 nav.addEventListener("mouseover", function (e) {
   handleHover(e, 0.35);
 });
 nav.addEventListener("mouseout", function (e) {
   handleHover(e, 1);
 });
+
+// Passing "argument" into handler
+// nav.addEventListener("mouseover", handleHover.bind(0.35));
+// nav.addEventListener("mouseout", handleHover.bind(1));
+
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
