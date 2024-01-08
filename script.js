@@ -95,7 +95,7 @@ const handleHover = function (e, opacity) {
   }
 };
 
-// need to update this section with handleHover.bind and i need to add this siblings foreach part
+// need to update this section with handleHover.bind and i need to add .this siblings foreach part
 nav.addEventListener("mouseover", function (e) {
   handleHover(e, 0.35);
 });
@@ -103,27 +103,12 @@ nav.addEventListener("mouseout", function (e) {
   handleHover(e, 1);
 });
 
-// Passing "argument" into handler
-// nav.addEventListener("mouseover", handleHover.bind(0.35));
-// nav.addEventListener("mouseout", handleHover.bind(1));
-
-// Sticky navigation
-// const initialCords = section1.getBoundingClientRect();
-
-// window.addEventListener("scroll", function () {
-//   if (this.window.scrollY > initialCords.top) nav.classList.add("sticky");
-//   else nav.classList.remove("sticky");
-// });
-
 // Sticky nav: Intersection Observer API
-
 const header = document.querySelector(".header");
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
 
   if (!entry.isIntersecting) {
     nav.classList.add("sticky");
@@ -138,6 +123,28 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+// Reveal sections
+const allSections = document.querySelectorAll(".section");
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove("section--hidden");
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add("section--hidden");
+});
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
