@@ -199,9 +199,6 @@ const nextSlide = function () {
   }
   goToSlide(curSlide);
 };
-
-btnRight.addEventListener("click", nextSlide);
-
 // Previous slide
 const prevSlide = function () {
   if (curSlide === 0) {
@@ -212,8 +209,13 @@ const prevSlide = function () {
   goToSlide(curSlide);
 };
 
+btnRight.addEventListener("click", nextSlide);
 btnLeft.addEventListener("click", prevSlide);
 
+document.addEventListener("keydown", function (e) {
+  (e.key === "ArrowLeft" && prevSlide()) ||
+    (e.key === "ArrowRight" && nextSlide());
+});
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
