@@ -205,7 +205,7 @@ btnRight.addEventListener("click", nextSlide);
 // Previous slide
 const prevSlide = function () {
   if (curSlide === 0) {
-    curSlide = maxSlide;
+    curSlide = maxSlide - 1;
   } else {
     curSlide--;
   }
